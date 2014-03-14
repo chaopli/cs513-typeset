@@ -311,6 +311,53 @@ D(v) = $\infty$\;
 \caption{Link-State (LS) Algorithm for Source Node u}
 \end{algorithm}
 \end{center}
+\subsection{The Distance-Vector (DV) Routing Algorithm}
+\begin{center}
+\begin{algorithm}
+Initialization:\;
+\ForAll{destinations y in N} {
+$D_x(y) = c(x, y)$\;
+}
+\ForEach{neighbor w} {
+	send distance vector $D_x = [D_x(y)]$: $y$ in $N$ to $w$\; 
+}
+\Repeat {forever}
+{
+	\textbf{wait} (until I see a link cost change to some neighbor $w$ or until I receive a distance vector from some neighbor $w$)\;
+	\ForEach{$y$ in $N$}
+	{
+		$D_x(y) = min_v{c(x,v)+D_v(y)}$
+	}
+	\If {$D_x(y)$ changed for any destination $y$}
+	{
+		send distance vector $D_x=[D_x(y)]$: $y$ in $N$ to all neighbors
+	}
+}
+\caption{Distance-Vector (DV) Algorithm}
+\end{algorithm}
+\end{center}
+\subsubsection{DC Algorithm: Adding Poisoned Reverse}
+\item if $z$ routes through $y$ to get to destination $x$, then $z$ will advertise to $y$ that its distance to x is infinity, that is, $z$ will advertise to $y$ that $D_z(x)=\infty$ (even though $z knows D_z(x)=5$ in truth). $z$ will continue telling this little white lie to $y$ as long as it routes to $x$ via $y$.
+\subsubsection{A comparison of LS and DV Routing Algorithms}
+\begin{center}
+\begin{tabular}{| l |p{5cm}|p{5cm}|}
+  \hline
+   & LS Algorithm & DV Algorithm \\ \hline
+  Message Complexity & $O(|N||E|)$   & Depand on many factors \\ \hline
+  Speed of Convergence  & $O(N^2)$ & converge slowly \\ \hline
+  Robustness & Routing calculation are somewhat separated, providing a degree of robustness & Erroneous propagate iteratively, which may cause significant problem. \\ \hline
+\end{tabular}
+$E$: the set of edges \\
+$N$: the set of nodes \\
+\end{center}
+\subsubsection{Other Routing Algorithms}
+\item \textbf{Circuit-Switched Routing Algorithms}: are of interest to packet-switched data networking in cases where per-link resources are to be reserved for each connection that is routed over the link. (From the telephony world).
+\subsection{Hierarchical Routing}
+\item Our previous view of network was simplized in the \emph{scale} and \emph{Administrative autonomy} two aspects.
+\item Both of these problems can be solved by organizing routers into \textbf{autonomous systems (ASs)}, with each AS consisting of a group of routers that are typically under the same administrative control.
+\item The routing algorithm running within an autonomous system is called an \textbf{autonomous system routing protocol}.
+\item Routers that have the added task of being responsible for forwarding packets to destinations outside the AS are call \textbf{gateway routers}.
+\item 
 \end{itemize}
 
 \end{document}
