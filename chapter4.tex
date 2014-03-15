@@ -218,7 +218,7 @@ addresses to link interfaces.
   outside the organization's network, which reduces the size of the
   forwarding table.
 \item IP broadcast address 255.255.255.255
-\subsubsection{Obtaining a Host Address: Dynamic Host Configuration
+\subsubsection*{Obtaining a Host Address: Dynamic Host Configuration
   Protocol}
 \item DHCP allows a host to learn additional information, such as its
   subnet mask, the address of its first-hop router (often called the
@@ -238,7 +238,7 @@ addresses to link interfaces.
   message.
 \item \emph{DHCP ACK}
 \end{enumerate}
-\subsubsection{Network Address Translation (NAT)}
+\subsubsection*{Network Address Translation (NAT)}
 \item See Page 350-351 for details.
 \subsection{Internet Control Message Protocol (ICMP)}
 \item The network layer has three main components: The IP protocol,
@@ -251,7 +251,7 @@ addresses to link interfaces.
   header and the first 8 bytes of the IP datagram that caused the ICMP
   message to be generated in the first place
 \subsection{IPv6}
-\subsubsection{IPv6 Datagram Format}
+\subsubsection*{IPv6 Datagram Format}
 \item \emph{Fragmentation/Reassembly}: IPv6 Does not allow for
   fragmentation and reassembly at intermediate routers; these
   operations can performed only by the source and destination.
@@ -262,7 +262,7 @@ addresses to link interfaces.
 \item \emph{Header checksum} removed because of functinality exists in
   transport-layer and link-layer protocols.
 \item Options field is also removed.
-\subsubsection{Transitioning from IPv4 to IPv6}
+\subsubsection*{Transitioning from IPv4 to IPv6}
 \item \emph{dual-stack approach}: illustrated on page 360. Basically,
   if a IPv6 datagram encounter an IPv4 router, it will be rebuilt into
   a IPv4 datagram and hence some of the IPv6 information are lost.
@@ -336,28 +336,36 @@ $D_x(y) = c(x, y)$\;
 \caption{Distance-Vector (DV) Algorithm}
 \end{algorithm}
 \end{center}
-\subsubsection{DC Algorithm: Adding Poisoned Reverse}
+\subsubsection*{DC Algorithm: Adding Poisoned Reverse}
 \item if $z$ routes through $y$ to get to destination $x$, then $z$ will advertise to $y$ that its distance to x is infinity, that is, $z$ will advertise to $y$ that $D_z(x)=\infty$ (even though $z knows D_z(x)=5$ in truth). $z$ will continue telling this little white lie to $y$ as long as it routes to $x$ via $y$.
-\subsubsection{A comparison of LS and DV Routing Algorithms}
+\subsubsection*{A comparison of LS and DV Routing Algorithms}
 \begin{center}
 \begin{tabular}{| l |p{5cm}|p{5cm}|}
   \hline
    & LS Algorithm & DV Algorithm \\ \hline
-  Message Complexity & $O(|N||E|)$   & Depand on many factors \\ \hline
+  Message Complexity & $O(|N||E|)$   & Depend on many factors \\ \hline
   Speed of Convergence  & $O(N^2)$ & converge slowly \\ \hline
   Robustness & Routing calculation are somewhat separated, providing a degree of robustness & Erroneous propagate iteratively, which may cause significant problem. \\ \hline
 \end{tabular}
 $E$: the set of edges \\
 $N$: the set of nodes \\
 \end{center}
-\subsubsection{Other Routing Algorithms}
+\subsubsection*{Other Routing Algorithms}
 \item \textbf{Circuit-Switched Routing Algorithms}: are of interest to packet-switched data networking in cases where per-link resources are to be reserved for each connection that is routed over the link. (From the telephony world).
 \subsection{Hierarchical Routing}
 \item Our previous view of network was simplized in the \emph{scale} and \emph{Administrative autonomy} two aspects.
 \item Both of these problems can be solved by organizing routers into \textbf{autonomous systems (ASs)}, with each AS consisting of a group of routers that are typically under the same administrative control.
 \item The routing algorithm running within an autonomous system is called an \textbf{autonomous system routing protocol}.
 \item Routers that have the added task of being responsible for forwarding packets to destinations outside the AS are call \textbf{gateway routers}.
-\item 
+\item \textbf{inter-AS routing protocol} handles two tasks
+\begin{itemize}
+\item Obtaining reachability information from neighboring ASs
+\item Propagating the reachability information to all routers internal to the AS
+\end{itemize}
+\item In the Internet all ASs run the same inter-AS routing protocol, called BGP4
+\item \emph{hot-potato routing}: A router send the packet to the gateway router with the smallest router-to-gateway cost.
+\section{Routing in the Internet}
+\item Detail in book.
 \end{itemize}
 
 \end{document}
